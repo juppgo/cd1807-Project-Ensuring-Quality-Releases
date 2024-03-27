@@ -60,11 +60,10 @@ def run_tests():
     chrome_binary_path = "/usr/bin/chromium-browser"
 
     # Create ChromeOptions object
-    chrome_options = ChromeOptions()
+    options = ChromeOptions()
 
     # Set the binary location
-    chrome_options.binary_location = chrome_binary_path
-    options = ChromeOptions()
+    options.binary_location = chrome_binary_path
     options.add_argument("--no-sandbox")
     options.add_argument("--headless")
     options.add_argument("--disable-dev-shm-usage")
