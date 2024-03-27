@@ -191,6 +191,8 @@ stages:
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
+                pip3 install --upgrade urllib3
+                pip3 install --upgrade chardet
                 cd ~/
                 DIR=/home/devopsagent/app
                 if [ ! -d "$DIR" ]; then
