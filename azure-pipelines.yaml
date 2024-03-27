@@ -186,6 +186,7 @@ stages:
               script: |           
                 #! /bin/bash
                 
+                lsb_release -a
                 sudo apt-get update && apt-get upgrade -y
                 sudo apt-get install python3-pip unzip chromium-browser -y
                 pip3 install selenium
