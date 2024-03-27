@@ -7,10 +7,7 @@ variable "resource_group_name" {
 
 variable "subnet_id_test" {}
 variable "public_ip_address_id" {} 
+variable "packer_image" {}
 variable "admin_username" {
-    default = "adminuser"
-}
-
-variable "admin_password" {
-  default = "s4f€p1assw0r3"
+  
 }
