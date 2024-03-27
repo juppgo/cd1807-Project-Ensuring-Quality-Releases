@@ -189,6 +189,8 @@ stages:
                 lsb_release -a
                 sudo apt-get update && apt-get upgrade -y
                 sudo apt-get install python3-pip unzip chromium-browser -y
+                sudo apt-get install -y sudo apt-get install fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcairo2 libcups2 libgbm1 libgtk-3-0 libpango-1.0-0 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 libxfixes3 libxkbcommon0 libxrandr2 xdg-utils
+                sudo dpkg -i google-chrome-stable_current_amd64.deb
                 pip3 install selenium
                 pip3 install --upgrade selenium
                 pip3 install --upgrade requests
@@ -207,17 +209,7 @@ stages:
                     unzip -o chromedriver-linux64.zip
                     sudo ln -s $PWD/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
                 fi
-                FILE2=/home/devopsagent/app/chrome-linux64.zip
-                if [ ! -f "$FILE2" ]; then
-                    
-                    wget 	wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chrome-linux64.zip
-                    unzip -o chrome-linux64.zip
-                    # Move binaries to /usr/local/bin
-                    sudo mv chrome-linux64/* /usr/local/bin
-                    sudo chmod +x /usr/local/bin/chrome
-                fi
                 export PATH=$PATH:/home/devopsagent/app
-
                 echo "Starting Selenium Tests"
                 python3 selenium_test.py >> selenium.log
                 echo "Completed Selenium Tests. Check selenium.log for results."
