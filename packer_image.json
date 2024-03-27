@@ -29,13 +29,17 @@
     "provisioners": [{
       "inline": [
         "apt-get update && apt-get upgrade -y",
-        "apt-get install -y python3-pip unzip chromium-browser chromium-chromedriver python3-venv",
+        "apt-get install -y python3-venv",
+        "apt-get install -y python3-pip",
+        "apt-get install -y unzip",
+        "apt-get install -y chromium-browser",
+        "apt-get install -y chromium-chromedriver",
         "python3 -m venv env",
         "pip3 install selenium",
-        "CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)",
-        "wget https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip",
-        "unzip chromedriver_linux64.zip",
-        "rm chromedriver_linux64.zip",
+        "wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chromedriver-linux64.zip",
+        "ls -la",
+        "unzip chromedriver-linux64.zip",
+        "rm chromedriver-linux64.zip",
         "chown root:root chromedriver",
         "chmod 777 chromedriver"
       ],
