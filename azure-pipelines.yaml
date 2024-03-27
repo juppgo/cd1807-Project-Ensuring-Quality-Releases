@@ -103,6 +103,7 @@ stages:
         includeRootFolder: false
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip'
+        replaceExistingArchive: true
     # Selenium Test Suite - Publish the package  
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-uitests.zip   # Same as the archiveFile artifact above. 
       displayName: 'Upload Package'
@@ -117,6 +118,7 @@ stages:
         includeRootFolder: false
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
+        replaceExistingArchive: true
    # FakeRestAPI - Publish
     - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
       displayName: 'Upload fakerrestapi Package'
@@ -132,6 +134,7 @@ stages:
         includeRootFolder: false
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip'
+        replaceExistingArchive: true
     # JMeter Test Suite - Publish    
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip
       displayName: 'Upload Package'
@@ -168,6 +171,7 @@ stages:
     environment:
       name: linux-test
       resourceType: VirtualMachine
+
     strategy:
       runOnce:
         deploy:
