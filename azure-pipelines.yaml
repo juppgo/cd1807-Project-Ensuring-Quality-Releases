@@ -147,7 +147,7 @@ stages:
   # ToDo: Provide <environment name> you created in your DevOps project
   - deployment: FakeRestAPI
     pool: myLinuxVM-pool     
-    environment: myLinuxVM
+    environment: linux-test
     strategy:
       runOnce:
         deploy:
