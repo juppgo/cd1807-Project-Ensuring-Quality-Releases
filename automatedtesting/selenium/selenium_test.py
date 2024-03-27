@@ -56,6 +56,14 @@ def remove_items_to_cart(driver):
 def run_tests():
     """Run the test"""
     log_timestamp("Starting the browser...")
+    # Set the path to the Chromium binary
+    chrome_binary_path = "/usr/bin/chromium-browser"
+
+    # Create ChromeOptions object
+    chrome_options = ChromeOptions()
+
+    # Set the binary location
+    chrome_options.binary_location = chrome_binary_path
     options = ChromeOptions()
     options.add_argument("--no-sandbox")
     options.add_argument("--headless")
