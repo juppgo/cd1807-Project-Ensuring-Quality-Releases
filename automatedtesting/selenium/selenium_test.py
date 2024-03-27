@@ -58,6 +58,7 @@ def run_tests():
     log_timestamp("Starting the browser...")
     # Set the path to the Chromium binary
     chrome_binary_path = "/usr/bin/chromium-browser"
+    chromedriver_path = "/usr/local/bin/chromedriver"
 
     # Create ChromeOptions object
     options = ChromeOptions()
@@ -68,7 +69,7 @@ def run_tests():
     options.add_argument("--headless")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--remote-debugging-port=9222")
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
     log_timestamp("Starting the browser...")
     try:
         log_timestamp("Login")
