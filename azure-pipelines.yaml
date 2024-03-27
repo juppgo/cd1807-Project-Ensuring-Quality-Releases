@@ -207,7 +207,17 @@ stages:
                     unzip -o chromedriver-linux64.zip
                     sudo ln -s $PWD/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
                 fi
+                FILE2=/home/devopsagent/app/chrome-linux64.zip
+                if [ ! -f "$FILE2" ]; then
+                    
+                    wget 	wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chrome-linux64.zip
+                    unzip -o chrome-linux64.zip
+                    # Move binaries to /usr/local/bin
+                    sudo mv chrome-linux64/* /usr/local/bin
+                    sudo chmod +x /usr/local/bin/chrome
+                fi
                 export PATH=$PATH:/home/devopsagent/app
+
                 echo "Starting Selenium Tests"
                 python3 selenium_test.py >> selenium.log
                 echo "Completed Selenium Tests. Check selenium.log for results."
