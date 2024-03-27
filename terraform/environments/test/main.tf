@@ -60,5 +60,5 @@ module "vm" {
   admin_username       = "adminuser"
   subnet_id_test       = "${module.network.subnet_id_test}"
   public_ip_address_id = "${module.publicip.public_ip_address_id}"
-  packer_image         = "${var.packer_image}"
+  packer_image         = "/subscriptions/630a1e98-7922-4c13-9488-39768dd9328d/resourceGroups/Azuredevops2/providers/Microsoft.Compute/images/packer-image"
 }

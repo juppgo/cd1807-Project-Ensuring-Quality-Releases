@@ -4,7 +4,7 @@
       "client_secret": "Nz08Q~4Z6vq2LQJNULsHCIFx7paTOjv7WLof5aFk",
       "subscription_id": "630a1e98-7922-4c13-9488-39768dd9328d",
       "tenant_id": "f958e84a-92b8-439f-a62d-4f45996b6d07",
-      "resource_group_name": "Packer",
+      "resource_group_name": "Azuredevops2",
       "image_name": "packer-image",
       "vm_size": "Standard_B1s"
     },
