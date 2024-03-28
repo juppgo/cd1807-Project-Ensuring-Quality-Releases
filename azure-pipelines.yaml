@@ -237,7 +237,7 @@ stages:
     - task: ArchiveFiles@2
       displayName: Save JMeter Endurance Test Report to Artifact
       inputs:
-          rootFolderOrFile: "$(Agent.BuildDirectory))/s/log/jmeter/endurance_test_html_report"
+          rootFolderOrFile: "$(Agent.BuildDirectory)/s/log/jmeter/endurance_test_html_report"
           includeRootFolder: false
           archiveType: "zip"
           archiveFile: "$(Build.ArtifactStagingDirectory)/log/jmeter/endurance_test_html_report_$(Build.BuildId).zip"
