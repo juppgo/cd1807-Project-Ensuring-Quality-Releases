@@ -240,7 +240,7 @@ stages:
             displayName: Publish JMeter Logs
             inputs:
               targetPath: "$(System.DefaultWorkingDirectory)/log/jmeter"
-              artifactName: "drop-jmeter-logs"              
+              artifactName: "drop-jmeter-logs"
 
 #--------------------------------------------#  
   # Selenium | Functional UI Tests
