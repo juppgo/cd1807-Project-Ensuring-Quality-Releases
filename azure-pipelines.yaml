@@ -149,7 +149,7 @@ stages:
   #--------------------------------------------#  
   # Deploy FakeRestAPI Web App
   # ToDo: Provide <environment name> you created in your DevOps project
-  - deployment: DeployApplicationAndRunTests
+  - deployment: DeployApplication
     pool: myLinuxVM-pool     
     environment: linux-test
     strategy:
@@ -169,7 +169,7 @@ stages:
           # -------------------------------------------#
 - stage: Test
   jobs:
-  - job: TestAPI
+  - job: TestApplication
     steps:        
     # Postman - Install Newman    
     - task: NodeTool@0
