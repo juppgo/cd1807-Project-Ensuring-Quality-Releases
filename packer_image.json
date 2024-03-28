@@ -1,8 +1,8 @@
 {
     "variables": {
-      "client_id": "02f977bf-2d4b-4a5d-80be-9d5204f21458",
-      "client_secret": "Nz08Q~4Z6vq2LQJNULsHCIFx7paTOjv7WLof5aFk",
-      "subscription_id": "630a1e98-7922-4c13-9488-39768dd9328d",
+      "client_id": "8a430e4a-2ef4-4c71-aee6-e5a2ae27d18c",
+      "client_secret": "BH58Q~MbbQCEe_zlui7o~pAmLCx04DHeT4-h2cOC",
+      "subscription_id": "0ee6d06f-69ab-4b3b-9f35-003e1b6eb227",
       "tenant_id": "f958e84a-92b8-439f-a62d-4f45996b6d07",
       "resource_group_name": "Azuredevops2",
       "image_name": "packer-image",
@@ -32,8 +32,8 @@
         "apt-get install -y python3-venv",
         "apt-get install -y python3-pip",
         "apt-get install -y unzip",
-        "apt-get install -y -y sudo apt-get install fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcairo2 libcups2 libgbm1 libgtk-3-0 libpango-1.0-0 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 libxfixes3 libxkbcommon0 libxrandr2 xdg-utils",
-        "sudo dpkg -i google-chrome-stable_current_amd64.deb",
+        "apt-get install -y fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcairo2 libcups2 libgbm1 libgtk-3-0 libpango-1.0-0 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 libxfixes3 libxkbcommon0 libxrandr2 xdg-utils",
+        "dpkg -i google-chrome-stable_current_amd64.deb",
         "python3 -m venv env",
         "pip3 install selenium",
         "wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chromedriver-linux64.zip",

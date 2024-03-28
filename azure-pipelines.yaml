@@ -13,7 +13,7 @@ pool: myLinuxVM-pool
 variables:
   python.version: '3.8.10'
   # ToDo: Replace the service connection name as used in the DevOps project settings
-  azureServiceConnectionId: '3c23f641-db28-4739-81be-7fa5903000ba'
+  azureServiceConnectionId: '5334d500-6ba7-492d-ba68-c38bc4fe0639'
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
   # Environment name
@@ -45,7 +45,7 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         backendServiceArm: '$(azureServiceConnectionId)'
         backendAzureRmResourceGroupName: 'Azuredevops'
-        backendAzureRmStorageAccountName: 'tfstate17118374'
+        backendAzureRmStorageAccountName: 'tfstate107859705'
         backendAzureRmContainerName: 'tfstate'
         backendAzureRmKey: 'test.terraform.tfstate'
 
