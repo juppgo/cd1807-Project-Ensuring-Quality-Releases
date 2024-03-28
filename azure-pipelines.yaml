@@ -164,6 +164,39 @@ stages:
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip 
 
+          #--------------------------------------------#    
+          # Postman - Install Newman    
+          - task: CmdLine@2
+            displayName: Install Newman
+            inputs:
+              script: |
+                sudo apt-get -y install npm
+                sudo npm install -g newman
+              workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+          # Postman Data Validation Test Suite    
+          - task: CmdLine@2
+            displayName: Run Data Validation Tests
+            continueOnError: true
+            inputs:
+              script: 'newman run Validation_Test.postman_collection.json -e Environment.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+          # Postman Regression Test Suite    
+          - task: CmdLine@2
+            displayName: Run Regression Tests
+            continueOnError: true
+            inputs:
+              script: 'newman run Regression_Test.postman_collection.json -e Environment.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+          # Postman - Publish Results 
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '**/TEST-*.xml'
+              searchFolder: 'automatedtesting/postman'
+              mergeTestResults: true
+              testRunTitle: 'Publish test results'              
+
+
 #--------------------------------------------#  
   # Selenium | Functional UI Tests
   # ToDo: 
