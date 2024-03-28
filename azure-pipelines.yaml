@@ -160,8 +160,8 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: '$(azureServiceConnectionId)'
-              appName: myApplication20240327-AppService
-              appType: webAppLinux
+              appName: myApplication20240328-AppService
+              appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip 
 
 #--------------------------------------------#  
@@ -189,6 +189,8 @@ stages:
                 sudo apt-get update && apt-get upgrade -y
                 sudo apt-get install python3-pip unzip chromium-browser -y
                 sudo apt-get install -y sudo apt-get install fonts-liberation libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcairo2 libcups2 libgbm1 libgtk-3-0 libpango-1.0-0 libu2f-udev libvulkan1 libxcomposite1 libxdamage1 libxfixes3 libxkbcommon0 libxrandr2 xdg-utils
+                sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+                sudo apt --fix-broken install
                 sudo dpkg -i google-chrome-stable_current_amd64.deb
                 pip3 install selenium
                 pip3 install --upgrade selenium
