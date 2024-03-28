@@ -166,14 +166,14 @@ stages:
 
           #--------------------------------------------#    
           # Postman - Install Newman    
-          - task: CmdLine@2
-            displayName: Install Newman
+          - task: NodeTool@0
+            displayName: Install Node 16.0 and Newman
             inputs:
-              script: |
-                sudo apt-get update
-                sudo apt-get -y install npm
-                sudo npm install -g newman
-              workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+              versionSpec: '16.x'
+          - bash: |
+                npm install -g newman
+                mkdir -p log/newman
+              #workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
           # Postman Data Validation Test Suite    
           - task: CmdLine@2
             displayName: Run Data Validation Tests
