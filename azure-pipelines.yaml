@@ -148,7 +148,7 @@ stages:
   jobs:
   #--------------------------------------------#  
   # Deploy FakeRestAPI Web App
-  # ToDo: Provide <environment name> you created in your DevOps project
+  #--------------------------------------------#  
   - deployment: DeployApplication
     pool: myLinuxVM-pool     
     environment: linux-test
@@ -164,9 +164,9 @@ stages:
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip 
 
-          #--------------------------------------------#
-          # TEST STAGE
-          # -------------------------------------------#
+#--------------------------------------------#
+# TEST STAGE
+# -------------------------------------------#
 - stage: Test
   jobs:
   - job: TestApplication
@@ -204,6 +204,7 @@ stages:
         testRunTitle: 'Publish test results'            
     #--------------------------------------------#
     # Jmeter - Performance Test Suite
+    #--------------------------------------------#
     - task: JMeterInstaller@0
       displayName: 'Install JMeter 5.6'
       inputs:
@@ -249,8 +250,8 @@ stages:
         artifactName: "drop-jmeter-logs"
 
 #--------------------------------------------#  
-  # Selenium | Functional UI Tests
-  # ToDo: 
+# Selenium | Functional UI Tests             #
+#--------------------------------------------#  
   - deployment: VMDeploy
     displayName: Selenium Tests
     environment:
