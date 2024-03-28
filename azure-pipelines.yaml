@@ -297,10 +297,10 @@ stages:
                 fi
                 export PATH=$PATH:/home/devopsagent/app
                 echo "Starting Selenium Tests"
-                python3 selenium_test.py >> selenium.log
+                python3 selenium_test.py | sudo tee -a selenium.log
                 echo "Completed Selenium Tests. Check selenium.log for results."
           - task: PublishPipelineArtifact@1
             displayName: Publish Selenium Logs
             inputs:
-              targetPath: '$(System.DefaultWorkingDirectory)/selenium.log'
+              targetPath: '/home/azureuser/app/selenium.log'
               artifactName: 'drop-selenium-logs'
