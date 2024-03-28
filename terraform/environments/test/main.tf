@@ -61,5 +61,5 @@ module "vm" {
   //admin_password = "p4sw0rd!"
   subnet_id_test       = "${module.network.subnet_id_test}"
   public_ip_address_id = "${module.publicip.public_ip_address_id}"
-  packer_image         = "/subscriptions/630a1e98-7922-4c13-9488-39768dd9328d/resourceGroups/Azuredevops2/providers/Microsoft.Compute/images/packer-image"
+  packer_image         = "/subscriptions/0ee6d06f-69ab-4b3b-9f35-003e1b6eb227/resourceGroups/Azuredevops2/providers/Microsoft.Compute/images/packer-image"
 }
