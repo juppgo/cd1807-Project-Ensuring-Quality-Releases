@@ -164,86 +164,91 @@ stages:
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip 
 
-          #--------------------------------------------#    
-          # Postman - Install Newman    
-          - task: NodeTool@0
-            displayName: Install Node 16.0 and Newman
-            inputs:
-              versionSpec: '16.x'
-          - bash: |
-                npm install -g newman
-                mkdir -p log/newman
-              #workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-          # Postman Data Validation Test Suite    
-          - task: CmdLine@2
-            displayName: Run Data Validation Tests
-            continueOnError: true
-            inputs:
-              script: 'newman run Validation_Test.postman_collection.json -e Environment.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-          # Postman Regression Test Suite    
-          - task: CmdLine@2
-            displayName: Run Regression Tests
-            continueOnError: true
-            inputs:
-              script: 'newman run Regression_Test.postman_collection.json -e Environment.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
-          # Postman - Publish Results 
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: 'JUnit'
-              testResultsFiles: '**/TEST-*.xml'
-              searchFolder: 'automatedtesting/postman'
-              mergeTestResults: true
-              testRunTitle: 'Publish test results'              
-
-        #--------------------------------------------#
-        # Jmeter - Performance Test Suite
-          - task: JMeterInstaller@0
-            displayName: 'Install JMeter 5.6'
-            inputs:
-              jmeterVersion: '5.6'          
-          - task: Bash@3
-            displayName: Perform JMeter Stress Test
-            inputs:
-              targetType: 'inline'
-              script: |
-                $(Agent.ToolsDirectory)/jmeter-b78fe7bc0106f2518c30e8a491073b2c33bc8b3afeca19834f6642e7/5.6.0/x64/apache-jmeter-5.6/bin/jmeter -n -t $(Build.SourcesDirectory)/automatedtesting/jmeter/test-suite/Stress_Test.jmx \
-                -l $(Build.SourcesDirectory)/log/jmeter/stress-test-result.csv \
-                -e -f -o $(Build.SourcesDirectory)/log/jmeter/stress-test-html-report \
-                -j $(Build.SourcesDirectory)/log/jmeter/jmeter-stress-test.log
-                
-          - task: Bash@3
-            displayName: Perform JMeter Endurance Test
-            inputs:
-              targetType: 'inline'
-              script: |
-                $(Agent.ToolsDirectory)/jmeter-b78fe7bc0106f2518c30e8a491073b2c33bc8b3afeca19834f6642e7/5.6.0/x64/apache-jmeter-5.6/bin/jmeter -n -t $(Build.SourcesDirectory)/automatedtesting/jmeter/test-suite/Endurance_Test.jmx \
-                -l $(Build.SourcesDirectory)/log/jmeter/endurance_test_result.csv \
-                -e -f -o $(Build.SourcesDirectory)/log/jmeter/endurance_test_html_report \
-                -j $(Build.SourcesDirectory)/log/jmeter/jmeter_endurance_test.log
-
-          - task: ArchiveFiles@2
-            displayName: Save JMeter Stress Test Report to Artifact
-            inputs:
-                rootFolderOrFile: "$(Agent.BuildDirectory)/s/log/jmeter/stress_test_html_report"
-                includeRootFolder: false
-                archiveType: "zip"
-                archiveFile: "$(Build.ArtifactStagingDirectory)/log/jmeter/stress_test_html_report_$(Build.BuildId).zip"
-                verbose: true
-          - task: ArchiveFiles@2
-            displayName: Save JMeter Endurance Test Report to Artifact
-            inputs:
-                rootFolderOrFile: "$(Agent.BuildDirectory))/s/log/jmeter/endurance_test_html_report"
-                includeRootFolder: false
-                archiveType: "zip"
-                archiveFile: "$(Build.ArtifactStagingDirectory)/log/jmeter/endurance_test_html_report_$(Build.BuildId).zip"
-                verbose: true
-          - task: PublishPipelineArtifact@1
-            displayName: Publish JMeter Logs
-            inputs:
-              targetPath: "$(System.DefaultWorkingDirectory)/log/jmeter"
-              artifactName: "drop-jmeter-logs"
+          #--------------------------------------------#
+          # TEST STAGE
+          # -------------------------------------------#
+- stage:
+  jobs:
+  - job: TestAPI
+    steps:        
+    # Postman - Install Newman    
+    - task: NodeTool@0
+      displayName: Install Node 16.0 and Newman
+      inputs:
+        versionSpec: '16.x'
+    - bash: |
+          npm install -g newman
+          mkdir -p log/newman
+        #workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+    # Postman Data Validation Test Suite    
+    - task: CmdLine@2
+      displayName: Run Data Validation Tests
+      continueOnError: true
+      inputs:
+        script: 'newman run Validation_Test.postman_collection.json -e Environment.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+    # Postman Regression Test Suite    
+    - task: CmdLine@2
+      displayName: Run Regression Tests
+      continueOnError: true
+      inputs:
+        script: 'newman run Regression_Test.postman_collection.json -e Environment.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/automatedtesting/postman'
+    # Postman - Publish Results 
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/TEST-*.xml'
+        searchFolder: 'automatedtesting/postman'
+        mergeTestResults: true
+        testRunTitle: 'Publish test results'            
+    #--------------------------------------------#
+    # Jmeter - Performance Test Suite
+    - task: JMeterInstaller@0
+      displayName: 'Install JMeter 5.6'
+      inputs:
+        jmeterVersion: '5.6'          
+    - task: Bash@3
+      displayName: Perform JMeter Stress Test
+      inputs:
+        targetType: 'inline'
+        script: |
+          $(Agent.ToolsDirectory)/jmeter-b78fe7bc0106f2518c30e8a491073b2c33bc8b3afeca19834f6642e7/5.6.0/x64/apache-jmeter-5.6/bin/jmeter -n -t $(Build.SourcesDirectory)/automatedtesting/jmeter/test-suite/Stress_Test.jmx \
+          -l $(Build.SourcesDirectory)/log/jmeter/stress_test_result.csv \
+          -e -f -o $(Build.SourcesDirectory)/log/jmeter/stress_test_html_report \
+          -j $(Build.SourcesDirectory)/log/jmeter/jmeter-stress-test.log
+          cat jmeter-stress-test.log
+    - task: Bash@3
+      displayName: Perform JMeter Endurance Test
+      inputs:
+        targetType: 'inline'
+        script: |
+          $(Agent.ToolsDirectory)/jmeter-b78fe7bc0106f2518c30e8a491073b2c33bc8b3afeca19834f6642e7/5.6.0/x64/apache-jmeter-5.6/bin/jmeter -n -t $(Build.SourcesDirectory)/automatedtesting/jmeter/test-suite/Endurance_Test.jmx \
+          -l $(Build.SourcesDirectory)/log/jmeter/endurance_test_result.csv \
+          -e -f -o $(Build.SourcesDirectory)/log/jmeter/endurance_test_html_report \
+          -j $(Build.SourcesDirectory)/log/jmeter/jmeter_endurance_test.log
+          cat jmeter-endurance-test.log
+    - task: ArchiveFiles@2
+      displayName: Save JMeter Stress Test Report to Artifact
+      inputs:
+          rootFolderOrFile: "$(Agent.BuildDirectory)/s/log/jmeter/stress_test_html_report"
+          includeRootFolder: false
+          archiveType: "zip"
+          archiveFile: "$(Build.ArtifactStagingDirectory)/log/jmeter/stress_test_html_report_$(Build.BuildId).zip"
+          verbose: true
+    - task: ArchiveFiles@2
+      displayName: Save JMeter Endurance Test Report to Artifact
+      inputs:
+          rootFolderOrFile: "$(Agent.BuildDirectory))/s/log/jmeter/endurance_test_html_report"
+          includeRootFolder: false
+          archiveType: "zip"
+          archiveFile: "$(Build.ArtifactStagingDirectory)/log/jmeter/endurance_test_html_report_$(Build.BuildId).zip"
+          verbose: true
+    - task: PublishPipelineArtifact@1
+      displayName: Publish JMeter Logs
+      inputs:
+        targetPath: "$(System.DefaultWorkingDirectory)/log/jmeter"
+        artifactName: "drop-jmeter-logs"
 
 #--------------------------------------------#  
   # Selenium | Functional UI Tests
