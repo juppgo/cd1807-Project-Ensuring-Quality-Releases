@@ -216,8 +216,8 @@ stages:
           $(Agent.ToolsDirectory)/jmeter-b78fe7bc0106f2518c30e8a491073b2c33bc8b3afeca19834f6642e7/5.6.0/x64/apache-jmeter-5.6/bin/jmeter -n -t $(Build.SourcesDirectory)/automatedtesting/jmeter/test-suite/Stress_Test.jmx \
           -l $(Build.SourcesDirectory)/log/jmeter/stress_test_result.csv \
           -e -f -o $(Build.SourcesDirectory)/log/jmeter/stress_test_html_report \
-          -j $(Build.SourcesDirectory)/log/jmeter/jmeter-stress-test.log
-          cat jmeter-stress-test.log
+          -j $(Build.SourcesDirectory)/log/jmeter/jmeter_stress_test.log
+          cat jmeter_stress_test.log
     - task: Bash@3
       displayName: Perform JMeter Endurance Test
       inputs:
@@ -227,7 +227,7 @@ stages:
           -l $(Build.SourcesDirectory)/log/jmeter/endurance_test_result.csv \
           -e -f -o $(Build.SourcesDirectory)/log/jmeter/endurance_test_html_report \
           -j $(Build.SourcesDirectory)/log/jmeter/jmeter_endurance_test.log
-          cat jmeter-endurance-test.log
+          cat jmeter_endurance_test.log
     - task: ArchiveFiles@2
       displayName: Save JMeter Stress Test Report to Artifact
       inputs:
