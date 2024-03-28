@@ -149,7 +149,7 @@ stages:
   #--------------------------------------------#  
   # Deploy FakeRestAPI Web App
   # ToDo: Provide <environment name> you created in your DevOps project
-  - deployment: Deploy Application and Run Tests
+  - deployment: DeployApplicationAndRunTests
     pool: myLinuxVM-pool     
     environment: linux-test
     strategy:
