@@ -1,0 +1,1126 @@
+{
+	"info": {
+		"_postman_id": "b8d82804-9db8-4a19-8354-f5e6d503a693",
+		"name": "Validation_Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33900420"
+	},
+	"item": [
+		{
+			"name": "Get All Activities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields - ID, Title, DueDate, and Completed\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(activity) {",
+							"        pm.expect(activity).to.have.property('ID');",
+							"        pm.expect(activity).to.have.property('Title');",
+							"        pm.expect(activity).to.have.property('DueDate');",
+							"        pm.expect(activity).to.have.property('Completed');",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"DueDate is in a valid date format\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('array');",
+							"  responseData.forEach(function(activity) {",
+							"    pm.expect(activity.DueDate).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);",
+							"  });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Title is a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('array');",
+							"  responseData.forEach(function(activity) {",
+							"    pm.expect(activity.Title).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Title should not be empty\");",
+							"  });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Completed field is a boolean value\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    responseData.forEach(function(activity) {",
+							"        pm.expect(activity.Completed).to.be.a('boolean');",
+							"    });",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}Activities"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Authors",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields - ID, IDBook, FirstName, and LastName\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(author) {",
+							"        pm.expect(author).to.have.property('ID');",
+							"        pm.expect(author).to.have.property('IDBook');",
+							"        pm.expect(author).to.have.property('FirstName');",
+							"        pm.expect(author).to.have.property('LastName');",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"FirstName and LastName must be non-empty strings\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('array');",
+							"  responseData.forEach(function(author) {",
+							"    pm.expect(author.FirstName).to.be.a('string').and.to.have.lengthOf.at.least(1, \"FirstName should not be empty\");",
+							"    pm.expect(author.LastName).to.be.a('string').and.to.have.lengthOf.at.least(1, \"LastName should not be empty\");",
+							"  });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify the response content type is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"ID and IDBook are non-negative integers\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(entry => {",
+							"        pm.expect(entry.ID).to.be.a('number').and.to.be.at.least(0);",
+							"        pm.expect(entry.IDBook).to.be.a('number').and.to.be.at.least(0);",
+							"    });",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}Authors"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(book) {",
+							"        pm.expect(book).to.include.all.keys('ID', 'Title', 'Description', 'PageCount', 'Excerpt', 'PublishDate');",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Title is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    responseData.forEach(function(book) {",
+							"        pm.expect(book.Title).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Title should not be empty\");",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"PageCount is a non-negative integer\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(book) {",
+							"        pm.expect(book.PageCount).to.be.a('number').and.to.satisfy((val) => val >= 0, \"PageCount must be a non-negative integer\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/Books"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All CoverPhotos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields - ID, IDBook, and Url\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(item) {",
+							"        pm.expect(item.ID).to.exist;",
+							"        pm.expect(item.IDBook).to.exist;",
+							"        pm.expect(item.Url).to.exist;",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"ID is a non-negative integer\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('array');",
+							"  responseData.forEach(function(item) {",
+							"    pm.expect(item.ID).to.be.a('number').and.to.be.at.least(0, \"ID should be a non-negative integer\");",
+							"  });",
+							"});",
+							"",
+							"",
+							"pm.test(\"IDBook is a non-negative integer\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+							"    responseData.forEach(function(item) {",
+							"        pm.expect(item.IDBook).to.be.a('number').that.is.at.least(0);",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Url is a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('array');",
+							"  responseData.forEach(function(item) {",
+							"    pm.expect(item.Url).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Url should not be empty\");",
+							"  });",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/CoverPhotos"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.to.have.status(200));",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields - ID, UserName, and Password\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(user) {",
+							"        pm.expect(user).to.have.property('ID');",
+							"        pm.expect(user).to.have.property('UserName');",
+							"        pm.expect(user).to.have.property('Password');",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content-Type header is set to application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"ID should be a non-negative integer\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    responseData.forEach(function(user) {",
+							"        pm.expect(user.ID).to.be.a('number').and.to.be.at.least(0);",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"UserName and Password must be non-empty strings\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    responseData.forEach(function(user) {",
+							"        pm.expect(user.UserName).to.be.a('string').and.to.have.lengthOf.at.least(1, \"UserName should not be empty\");",
+							"        pm.expect(user.Password).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Password should not be empty\");",
+							"    });",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/Users"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Activity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has a valid Content-Type header\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response body is not empty\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.null;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response body is in a valid JSON format\", function () {",
+							"  pm.expect(pm.response.json()).to.be.null;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'activity' parameter is present in the request and has the expected value\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.null;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/Activities?activity=activity_udacity",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"Activities"
+					],
+					"query": [
+						{
+							"key": "activity",
+							"value": "activity_udacity"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content-Type header is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response body is null\", function () {",
+							"    pm.expect(pm.response.text()).to.eql('null');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'author' field is present in the request URL\", function () {",
+							"    pm.expect(pm.request.url.query.toObject()).to.have.property('author');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/Authors?author=author_udacity",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"Authors"
+					],
+					"query": [
+						{
+							"key": "author",
+							"value": "author_udacity"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response Content-Type is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response body is null\", function () {",
+							"    pm.expect(pm.response.text()).to.equal('null');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify the request URL contains the correct query parameter 'book=book_udacity'\", function () {",
+							"    const requestUrl = pm.request.url.toString();",
+							"    pm.expect(requestUrl).to.include('book=book_udacity');",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/Books?book=book_udacity",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"Books"
+					],
+					"query": [
+						{
+							"key": "book",
+							"value": "book_udacity"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create CoverPhoto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response Content-Type is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response body should be null\", function () {",
+							"    pm.expect(pm.response.json()).to.be.null;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the cover photo URL parameter is present in the request\", function () {",
+							"    const requestData = pm.request.url.query.toObject();",
+							"    ",
+							"    pm.expect(requestData).to.have.property('coverPhoto').that.is.not.null.and.not.undefined;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is within an acceptable range\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/CoverPhotos?coverPhoto=cover_udacity.jpeg",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"CoverPhotos"
+					],
+					"query": [
+						{
+							"key": "coverPhoto",
+							"value": "cover_udacity.jpeg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Response content type is application/json', function () {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"})",
+							"",
+							"pm.test('Response body is null', function () {",
+							"    pm.expect(pm.response.text()).to.equal('null');",
+							"})",
+							"",
+							"pm.test('Ensure that the response is not empty', function () {",
+							"    pm.expect(pm.response.text()).to.not.be.empty;",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/Users?user=user_udacity",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"Users"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "user_udacity"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Activity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content type is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"ID is a non-negative integer\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.ID).to.be.a('number').and.to.satisfy((num) => num >= 0, \"ID should be a non-negative integer\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Title is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.Title).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Title should not be empty\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/Activities/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields - ID, IDBook, FirstName, and LastName\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.include.all.keys('ID', 'IDBook', 'FirstName', 'LastName');",
+							"});",
+							"",
+							"",
+							"pm.test(\"FirstName and LastName must be non-empty strings\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.FirstName).to.be.a('string').and.to.have.lengthOf.at.least(1, \"FirstName should not be empty\");",
+							"  pm.expect(responseData.LastName).to.be.a('string').and.to.have.lengthOf.at.least(1, \"LastName should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"ID and IDBook are non-negative integers\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.ID).to.be.a('number').and.to.be.at.least(0, \"ID should be a non-negative integer\");",
+							"    pm.expect(responseData.IDBook).to.be.a('number').and.to.be.at.least(0, \"IDBook should be a non-negative integer\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content-Type header is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/Authors/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Content type is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.have.property('ID');",
+							"    pm.expect(responseData).to.have.property('Title');",
+							"    pm.expect(responseData).to.have.property('Description');",
+							"    pm.expect(responseData).to.have.property('PageCount');",
+							"    pm.expect(responseData).to.have.property('Excerpt');",
+							"    pm.expect(responseData).to.have.property('PublishDate');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Title is a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.Title).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Title should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"PageCount is a non-negative integer\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.PageCount).to.be.a('number').and.to.be.at.least(0);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/Books/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get CoverPhoto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Cover Photo with ID 1 as expected\", function () {",
+							"    pm.expect(jsonData.ID).to.eql(1);",
+							"    pm.expect(jsonData.IDBook).to.eql(1);",
+							"    pm.expect(jsonData.Url).to.eql(\"https://placeholdit.imgix.net/~text?txtsize=33&txt=Book 1&w=250&h=350\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/CoverPhotos/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"User with ID 1 as expected\", function () {",
+							"    pm.expect(jsonData.ID).to.eql(1);",
+							"    pm.expect(jsonData.UserName).to.eql(\"User 1\");",
+							"    pm.expect(jsonData.Password).to.eql(\"Password1\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/Users/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Activity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update activity response body as expected\", function () {",
+							"    pm.response.to.have.body(\"null\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/Activities/1?activity=activity_udacity_2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"Activities",
+						"1"
+					],
+					"query": [
+						{
+							"key": "activity",
+							"value": "activity_udacity_2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update author response body as expected\", function () {",
+							"    pm.response.to.have.body(\"null\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/Authors?author=author_udacity_2&id=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"Authors"
+					],
+					"query": [
+						{
+							"key": "author",
+							"value": "author_udacity_2"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update book response body as expected\", function () {",
+							"    pm.response.to.have.body(\"null\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/Books?book=book_udacity_2&id=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"Books"
+					],
+					"query": [
+						{
+							"key": "book",
+							"value": "book_udacity_2"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update CoverPhoto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update cover photo response body as expected\", function () {",
+							"    pm.response.to.have.body(\"null\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/CoverPhotos?coverPhoto=cover_udacity_2.png&id=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"CoverPhotos"
+					],
+					"query": [
+						{
+							"key": "coverPhoto",
+							"value": "cover_udacity_2.png"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update user response body as expected\", function () {",
+							"    pm.response.to.have.body(\"null\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/Users?user=user_udacity_2&id=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"Users"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "user_udacity_2"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Activity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete activity response as expected\", function () {",
+							"    pm.expect(pm.response.text()).to.eql(\"\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/Activities/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete author response as expected\", function () {",
+							"    pm.expect(pm.response.text()).to.eql(\"\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/Authors/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete book response as expected\", function () {",
+							"    pm.expect(pm.response.text()).to.eql(\"\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/Books/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete CoverPhoto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete cover photo response as expected\", function () {",
+							"    pm.expect(pm.response.text()).to.eql(\"\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/CoverPhotos/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete user response as expected\", function () {",
+							"    pm.expect(pm.response.text()).to.eql(\"\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/Users/1"
+			},
+			"response": []
+		}
+	]
+}
