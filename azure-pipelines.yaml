@@ -299,3 +299,8 @@ stages:
                 echo "Starting Selenium Tests"
                 python3 selenium_test.py >> selenium.log
                 echo "Completed Selenium Tests. Check selenium.log for results."
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Selenium Logs
+            inputs:
+              targetPath: '$(System.DefaultWorkingDirectory)/selenium.log'
+              artifactName: 'drop-selenium-logs'
