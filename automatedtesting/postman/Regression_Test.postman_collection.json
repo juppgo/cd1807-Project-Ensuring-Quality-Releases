@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "4cec43af-57d2-40d4-9a0c-bc31629f3074",
 		"name": "Regression_Test",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "33900420"
 	},
 	"item": [
@@ -17,14 +17,24 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{url}}/Activities"
+				"url": {
+					"raw": "{{url}}/api/Activities",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Activities"
+					]
+				}
 			},
 			"response": []
 		},
@@ -39,14 +49,24 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{url}}/Authors"
+				"url": {
+					"raw": "{{url}}/api/Authors",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Authors"
+					]
+				}
 			},
 			"response": []
 		},
@@ -61,14 +81,24 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{url}}/Books"
+				"url": {
+					"raw": "{{url}}/api/Books",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Books"
+					]
+				}
 			},
 			"response": []
 		},
@@ -83,14 +113,24 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{url}}/CoverPhotos"
+				"url": {
+					"raw": "{{url}}/api/CoverPhotos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"CoverPhotos"
+					]
+				}
 			},
 			"response": []
 		},
@@ -105,14 +145,24 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{url}}/Users"
+				"url": {
+					"raw": "{{url}}/api/Users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Users"
+					]
+				}
 			},
 			"response": []
 		},
@@ -127,7 +177,8 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -135,11 +186,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Activities?activity=activity_udacity",
+					"raw": "{{url}}/api/Activities?activity=activity_udacity",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"api",
 						"Activities"
 					],
 					"query": [
@@ -163,7 +215,8 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -171,11 +224,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Authors?author=author_udacity",
+					"raw": "{{url}}/api/Authors?author=author_udacity",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"api",
 						"Authors"
 					],
 					"query": [
@@ -199,7 +253,8 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -207,11 +262,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Books?book=book_udacity",
+					"raw": "{{url}}/api/Books?book=book_udacity",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"api",
 						"Books"
 					],
 					"query": [
@@ -235,7 +291,8 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -243,11 +300,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/CoverPhotos?coverPhoto=cover_udacity.jpeg",
+					"raw": "{{url}}/api/CoverPhotos?coverPhoto=cover_udacity.jpeg",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"api",
 						"CoverPhotos"
 					],
 					"query": [
@@ -271,7 +329,8 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -279,11 +338,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Users?user=user_udacity",
+					"raw": "{{url}}/api/Users?user=user_udacity",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"api",
 						"Users"
 					],
 					"query": [
@@ -307,14 +367,25 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{url}}/Activities/1"
+				"url": {
+					"raw": "{{url}}/api/Activities/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Activities",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -329,14 +400,25 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{url}}/Authors/1"
+				"url": {
+					"raw": "{{url}}/api/Authors/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Authors",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -351,14 +433,25 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{url}}/Books/1"
+				"url": {
+					"raw": "{{url}}/api/Books/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Books",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -373,14 +466,25 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{url}}/CoverPhotos/1"
+				"url": {
+					"raw": "{{url}}/api/CoverPhotos/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"CoverPhotos",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -395,14 +499,25 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{url}}/Users/1"
+				"url": {
+					"raw": "{{url}}/api/Users/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Users",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -417,7 +532,8 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -425,11 +541,12 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Activities/1?activity=updated_udacity_2",
+					"raw": "{{url}}/api/Activities/1?activity=updated_udacity_2",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"api",
 						"Activities",
 						"1"
 					],
@@ -454,7 +571,8 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -462,11 +580,12 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Authors?author=author_udacity_2&id=1",
+					"raw": "{{url}}/api/Authors?author=author_udacity_2&id=1",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"api",
 						"Authors"
 					],
 					"query": [
@@ -494,7 +613,8 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -502,11 +622,12 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Books?book=book_udacity_2&id=1",
+					"raw": "{{url}}/api/Books?book=book_udacity_2&id=1",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"api",
 						"Books"
 					],
 					"query": [
@@ -534,7 +655,8 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -542,11 +664,12 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/CoverPhotos?coverPhoto=cover_udacity_2.png&id=1",
+					"raw": "{{url}}/api/CoverPhotos?coverPhoto=cover_udacity_2.png&id=1",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"api",
 						"CoverPhotos"
 					],
 					"query": [
@@ -574,7 +697,8 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -582,11 +706,12 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/Users?user=User_udacity_2&id=1",
+					"raw": "{{url}}/api/Users?user=User_udacity_2&id=1",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"api",
 						"Users"
 					],
 					"query": [
@@ -614,14 +739,25 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "{{url}}/Activities/1"
+				"url": {
+					"raw": "{{url}}/api/Activities/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Activities",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -636,14 +772,25 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "{{url}}/Authors/1"
+				"url": {
+					"raw": "{{url}}/api/Authors/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Authors",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -658,14 +805,25 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "{{url}}/Books/1"
+				"url": {
+					"raw": "{{url}}/api/Books/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Books",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -680,14 +838,25 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "{{url}}/CoverPhotos/1"
+				"url": {
+					"raw": "{{url}}/api/CoverPhotos/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"CoverPhotos",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -702,14 +871,25 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "{{url}}/Users/1"
+				"url": {
+					"raw": "{{url}}/api/Users/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"Users",
+						"1"
+					]
+				}
 			},
 			"response": []
 		}
