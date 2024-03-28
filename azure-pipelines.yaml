@@ -217,7 +217,6 @@ stages:
           -l $(Build.SourcesDirectory)/log/jmeter/stress_test_result.csv \
           -e -f -o $(Build.SourcesDirectory)/log/jmeter/stress_test_html_report \
           -j $(Build.SourcesDirectory)/log/jmeter/jmeter_stress_test.log
-          cat jmeter_stress_test.log
     - task: Bash@3
       displayName: Perform JMeter Endurance Test
       inputs:
@@ -227,7 +226,6 @@ stages:
           -l $(Build.SourcesDirectory)/log/jmeter/endurance_test_result.csv \
           -e -f -o $(Build.SourcesDirectory)/log/jmeter/endurance_test_html_report \
           -j $(Build.SourcesDirectory)/log/jmeter/jmeter_endurance_test.log
-          cat jmeter_endurance_test.log
     - task: ArchiveFiles@2
       displayName: Save JMeter Stress Test Report to Artifact
       inputs:
