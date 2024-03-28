@@ -229,7 +229,7 @@ stages:
                 rootFolderOrFile: "$(System.DefaultWorkingDirectory)/log/jmeter/stress_test_html_report"
                 includeRootFolder: false
                 archiveType: "zip"
-                archiveFile: "$(Build.ArtifactStagingDirectory)/log/jmeter/stress_test_html_report_$(Build.BuildId).zip"
+                archiveFile: "$(Build.ArtifactStagingDirectory)/stress_test_html_report_$(Build.BuildId).zip"
                 verbose: true
           - task: ArchiveFiles@2
             displayName: Save JMeter Endurance Test Report to Artifact
@@ -237,7 +237,7 @@ stages:
                 rootFolderOrFile: "$(System.DefaultWorkingDirectory)/log/jmeter/endurance_test_html_report"
                 includeRootFolder: false
                 archiveType: "zip"
-                archiveFile: "$(Build.ArtifactStagingDirectory)/log/jmeter/endurance_test_html_report_$(Build.BuildId).zip"
+                archiveFile: "$(Build.ArtifactStagingDirectory)/endurance_test_html_report_$(Build.BuildId).zip"
                 verbose: true
           - task: PublishPipelineArtifact@1
             displayName: Publish JMeter Logs
