@@ -200,7 +200,7 @@ stages:
         #--------------------------------------------#
         # Jmeter - Performance Test Suite
           - task: Bash@3
-            displayName: Test JMeter
+            displayName: Download and extract JMeter
           - bash: |
                 sudo apt-get install openjdk-11-jre-headless -y
                 java -version
@@ -213,13 +213,13 @@ stages:
                 -l log/jmeter/stress-test-result.csv \
                 -e -f -o log/jmeter/stress-test-html-report \
                 -j log/jmeter/jmeter-stress-test.log
-            displayName: JMeter Stress Test
+            displayName: Perform JMeter Stress Test
           - bash: |
                 apache-jmeter-5.6/bin/jmeter -n -t automatedtesting/jmeter/Endurance_Test.jmx \
                 -l log/jmeter/endurance_test_result.csv \
                 -e -f -o log/jmeter/endurance_test_html_report \
                 -j log/jmeter/jmeter_endurance_test.log
-            displayName: JMeter Endurance Test
+            displayName: Perform JMeter Endurance Test
           - task: ArchiveFiles@2
             displayName: Save JMeter Stress Test Report to Artifact
             inputs:
