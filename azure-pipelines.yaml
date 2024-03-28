@@ -209,32 +209,32 @@ stages:
                 mkdir -p log/jmeter
             displayName: Install JMeter
           - bash: |
-                apache-jmeter-5.6/bin/jmeter -n -t automatedtesting/jmeter/stress-test.jmx \
+                apache-jmeter-5.6/bin/jmeter -n -t automatedtesting/jmeter/Stress_Test.jmx \
                 -l log/jmeter/stress-test-result.csv \
                 -e -f -o log/jmeter/stress-test-html-report \
                 -j log/jmeter/jmeter-stress-test.log
             displayName: JMeter Stress Test
           - bash: |
-                apache-jmeter-5.6/bin/jmeter -n -t automatedtesting/jmeter/endurance-test.jmx \
-                -l log/jmeter/endurance-test-result.csv \
-                -e -f -o log/jmeter/endurance-test-html-report \
-                -j log/jmeter/jmeter-endurance-test.log
+                apache-jmeter-5.6/bin/jmeter -n -t automatedtesting/jmeter/Endurance_Test.jmx \
+                -l log/jmeter/endurance_test_result.csv \
+                -e -f -o log/jmeter/endurance_test_html_report \
+                -j log/jmeter/jmeter_endurance_test.log
             displayName: JMeter Endurance Test
           - task: ArchiveFiles@2
             displayName: Save JMeter Stress Test Report to Artifact
             inputs:
-                rootFolderOrFile: "$(System.DefaultWorkingDirectory)/log/jmeter/stress-test-html-report"
+                rootFolderOrFile: "$(System.DefaultWorkingDirectory)/log/jmeter/stress_test_html_report"
                 includeRootFolder: false
                 archiveType: "zip"
-                archiveFile: "$(System.DefaultWorkingDirectory)/log/jmeter/stress-test-html-report-$(Build.BuildId).zip"
+                archiveFile: "$(System.DefaultWorkingDirectory)/log/jmeter/stress_test_html_report_$(Build.BuildId).zip"
                 verbose: true
           - task: ArchiveFiles@2
             displayName: Save JMeter Endurance Test Report to Artifact
             inputs:
-                rootFolderOrFile: "$(System.DefaultWorkingDirectory)/log/jmeter/endurance-test-html-report"
+                rootFolderOrFile: "$(System.DefaultWorkingDirectory)/log/jmeter/endurance_test_html_report"
                 includeRootFolder: false
                 archiveType: "zip"
-                archiveFile: "$(System.DefaultWorkingDirectory)/log/jmeter/endurance-test-html-report-$(Build.BuildId).zip"
+                archiveFile: "$(System.DefaultWorkingDirectory)/log/jmeter/endurance_test_html_report_$(Build.BuildId).zip"
                 verbose: true
           - task: PublishPipelineArtifact@1
             displayName: Publish JMeter Logs
