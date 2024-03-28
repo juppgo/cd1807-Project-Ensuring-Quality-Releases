@@ -199,21 +199,18 @@ stages:
 
         #--------------------------------------------#
         # Jmeter - Performance Test Suite
+          - task: JMeterInstaller@0
+            displayName: 'Install JMeter 5.6'
+            inputs:
+              jmeterVersion: '5.6'          
           - task: Bash@3
-            displayName: Download and extract JMeter
-          - bash: |
-                sudo apt-get install openjdk-11-jre-headless -y
-                java -version
-                wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.tgz -O jmeter.tgz
-                tar xzvf jmeter.tgz
-                mkdir -p log/jmeter
-            displayName: Install JMeter
+            displayName: Perform JMeter Stress Test
           - bash: |
                 apache-jmeter-5.6/bin/jmeter -n -t automatedtesting/jmeter/Stress_Test.jmx \
                 -l log/jmeter/stress-test-result.csv \
                 -e -f -o log/jmeter/stress-test-html-report \
                 -j log/jmeter/jmeter-stress-test.log
-            displayName: Perform JMeter Stress Test
+            
           - bash: |
                 apache-jmeter-5.6/bin/jmeter -n -t automatedtesting/jmeter/Endurance_Test.jmx \
                 -l log/jmeter/endurance_test_result.csv \
