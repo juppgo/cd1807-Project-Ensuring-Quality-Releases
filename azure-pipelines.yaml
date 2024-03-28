@@ -205,17 +205,32 @@ stages:
               jmeterVersion: '5.6'          
           - task: Bash@3
             displayName: Perform JMeter Stress Test
-          - bash: |
-                apache-jmeter-5.6/bin/jmeter -n -t automatedtesting/jmeter/Stress_Test.jmx \
-                -l log/jmeter/stress-test-result.csv \
-                -e -f -o log/jmeter/stress-test-html-report \
-                -j log/jmeter/jmeter-stress-test.log
-          - bash: |
-                apache-jmeter-5.6/bin/jmeter -n -t automatedtesting/jmeter/Endurance_Test.jmx \
-                -l log/jmeter/endurance_test_result.csv \
-                -e -f -o log/jmeter/endurance_test_html_report \
-                -j log/jmeter/jmeter_endurance_test.log
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Navigate to the JMeter directory
+                cd $(Agent.ToolsDirectory)/apache-jmeter-5.6/bin
+                
+                # Execute the stress test
+                ./jmeter -n -t $(Build.SourcesDirectory)/automatedtesting/jmeter/Stress_Test.jmx \
+                -l $(Build.SourcesDirectory)/log/jmeter/stress-test-result.csv \
+                -e -f -o $(Build.SourcesDirectory)/log/jmeter/stress-test-html-report \
+                -j $(Build.SourcesDirectory)/log/jmeter/jmeter-stress-test.log
+                
+          - task: Bash@3
             displayName: Perform JMeter Endurance Test
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Navigate to the JMeter directory
+                cd $(Agent.ToolsDirectory)/apache-jmeter-5.6/bin
+                
+                # Execute the endurance test
+                ./jmeter -n -t $(Build.SourcesDirectory)/automatedtesting/jmeter/Endurance_Test.jmx \
+                -l $(Build.SourcesDirectory)/log/jmeter/endurance_test_result.csv \
+                -e -f -o $(Build.SourcesDirectory)/log/jmeter/endurance_test_html_report \
+                -j $(Build.SourcesDirectory)/log/jmeter/jmeter_endurance_test.log
+
           - task: ArchiveFiles@2
             displayName: Save JMeter Stress Test Report to Artifact
             inputs:
