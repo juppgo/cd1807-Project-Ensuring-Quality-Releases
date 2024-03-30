@@ -1,10 +1,24 @@
-# Project Starter
-This repository contains the starter code for the **Ensuring Quality Releases** project of the cd1807 Ensuring Quality Releases (Quality Assurance) course taught by Nathan Anderson. 
+# Ensuring Quality Releases - Project
 
+This project focuses on leveraging industry-leading tools, particularly Microsoft Azure, to establish a robust pipeline for creating disposable test environments, running automated tests effortlessly, and ensuring the quality of software releases.
 
-## How to use?
-- Fork this repository to your Github account and clone it locally for further development. 
-- Follow the classroom instructions, and check the rubric before a submission. 
+## Overview
 
-## Suggestions and Corrections
-Feel free to submit PRs to this repo should you have any proposed changes. 
+### Pipeline Resources
+
+This CI/CD pipeline will generate the following essential resources:
+
+* Resource Group
+* App Service
+* Virtual Network
+* Network Security Group
+* Virtual Machine
+
+These resources are orchestrated to deploy a demo REST API within the App Service, while comprehensive automated tests are executed against the REST API from a virtual machine created using Terraform in the CI/CD pipeline.
+
+### Tests
+
+The pipeline includes automated tests developed using 
+* *Postman* for API Testing (Integration Testing)
+* *JMeter* for Performance Testing
+* *Selenium* using Chromedriver for Functional UI Testing
